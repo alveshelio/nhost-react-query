@@ -51,3 +51,6 @@ super-linter.log
 # Nhost
 api/node_modules
 .nhost
+
+.graphqlconfig
+schema.graphql
