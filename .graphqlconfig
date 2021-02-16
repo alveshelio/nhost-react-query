@@ -1,0 +1,16 @@
+{
+  "name": "Avansai Graphql Schema",
+  "schemaPath": "./schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "Local Avansai GraphQL Endpoint": {
+        "url": "https://hasura-1ca97587.nhost.app/v1/graphql",
+        "headers": {
+          "user-agent": "JS GraphQL",
+          "x-hasura-admin-secret": "ad1d8f0afb1f561fe168bd2770258900"
+        },
+        "introspect": true
+      }
+    }
+  }
+}
