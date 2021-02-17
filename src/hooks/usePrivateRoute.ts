@@ -2,36 +2,52 @@ import { useAuth } from '@nhost/react-auth'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { auth } from '@libs/nhost'
+import { useLocalStorage } from 'react-use'
 
 interface UsePrivateRouteResult {
   userId: string | null
-  redirecting: boolean
-  signingIn: boolean
   redirectTo: string
+  removeRedirectTo: () => void
+  checkingAuth: boolean
 }
 
-export function usePrivateRoute(): UsePrivateRouteResult {
-  const [redirecting, setRedirecting] = useState(false)
-  const [signingIn, setSigningIn] = useState(false)
+export function usePrivateRoute(redirectRoute?: string): UsePrivateRouteResult {
+  const [redirectTo, setRedirectTo, removeRedirectTo] = useLocalStorage<string>('redirectTo')
   const [userId, setUserId] = useState<string | null>(null)
-  const router = useRouter()
+  const [checkingAuth, setCheckingAuth] = useState<boolean>(true)
   const { signedIn } = useAuth()
-
-  console.log('router', router)
+  const router = useRouter()
 
   useEffect(() => {
-    if (!signedIn) {
-      setRedirecting(true)
+    if (typeof signedIn !== 'boolean') {
+      setCheckingAuth(true)
+    }
+
+    if (typeof signedIn === 'boolean') {
+      setCheckingAuth(false)
+    }
+  }, [signedIn])
+
+  useEffect(() => {
+    if (typeof signedIn === 'boolean' && !signedIn && router.pathname !== '/login') {
       router.push('/login').then()
     }
-    if (signedIn === null) {
-      setSigningIn(true)
-    }
+  }, [router, signedIn])
+
+  useEffect(() => {
     if (signedIn) {
       const id = auth.getClaim('x-hasura-user-id')
       setUserId(id)
     }
-  }, [router, signedIn])
+  }, [signedIn])
 
-  return { redirectTo: router.pathname, signingIn, userId, redirecting }
+  useEffect(() => {
+    if (typeof signedIn === 'boolean' && !signedIn) {
+      if (redirectRoute && !redirectTo) {
+        setRedirectTo(redirectRoute)
+      }
+    }
+  }, [redirectRoute, redirectTo, setRedirectTo, signedIn])
+
+  return { redirectTo, userId, removeRedirectTo, checkingAuth }
 }
