@@ -1,13 +1,6 @@
-# A Light / Dark Themed Next.js Starter Kit
+# A Next.js / Nhost / React-Query Starter Kit
 
-> Starting a NextJS project can be quite time-consuming and tedious. So why waste your precious time when you can have pretty much everything you need to start a new
-> **Next.js** project packed in this **Starter Kit**
-
-> Thank you to [Kahlil](https://github.com/kahlil/dark) for the inspiration. I've started by forking the repo and
-> ended up making quite some changes.
->
-> Added eslint and prettier from
-> [paulintrognon.fr](https://paulintrognon.fr/blog/typescript-prettier-eslint-next-js).
+> This is a **Starter Kit** to help you get started with **Next.js** and **Nhost** using **React-Query** library
 
 ## Included in this Starter Kit
 
@@ -19,25 +12,39 @@
 6. Unit Testing with [Jest](https://jestjs.io/) & [Texting Library](https://testing-library.com/)
 7. E2E Testing with [Cypress](https://cypress.io)
 8. CI/CD with [Github Actions](https://github.com/features/actions)
+9. Backend with [Nhost](https://nhost.io)
+10. Data layer with [react-query](https://react-query.tanstack.com/)
 
 ## Getting Started
 
 You can use this **Starter Kit** in a couple of different ways.
 
 1. You can use this starter kit as an example for **NextJs**
-   `yarn create next-app my-app --example https://github.com/alveshelio/next-chakra-ui-starter-kit`
+   `yarn create next-app my-app --example https://github.com/alveshelio/nhost-react-query`
 2. You can generate a new Repo from this one with
-   [github.com/alveshelio/next-chakra-ui-starter-kit](https://github.com/alveshelio/next-chakra-ui-starter-kit/generate)
+   [github.com/alveshelio/nhost-react-query](https://github.com/alveshelio/nhost-react-query)
 3. You can clone this repo
-   `git clone https://github.com/alveshelio/next-chakra-ui-starter-kit my-app`
+   `git clone https://github.com/alveshelio/nhost-react-query my-app`
 4. `cd my-app`
 5. Install dependencies `yarn install`
 6. Start the server `yarn dev`
-7. Hit the ground running with Next.js, TypeScript & Chakra UI
+7. Rename `.env.example` to `.env.local` and change `NEXT_PUBLIC_GRAPHQL_ENDPOINT`, `NEXT_PUBLIC_BACKEND_ENDPOINT` 
+   and `NEXT_PUBLIC_HASURA_SECRET` pointing it to your **Nhost** project
+8. Hit the ground running with Next.js, TypeScript & Chakra UI
+
+### Local Development with Nhost
+1. Install Nhost Cli: `npm install -g nhost`
+2. Init **Nhost** in your project root `nhost init`
+3. Once your project has been set up, `nhost dev`
 
 Please refer to the respective docs (linked above) in order to learn about these technologies.
 
 ## Documentation
+
+### Backend (Nhost)
+**Nhost** allows you to build apps fast without the need to manage infrastructure.
+Completely open-source, **Nhost** provides you with a **database** (postgresql), **GraphQL** engine (Hasura), **User 
+Authentication** and **Storage**.
 
 ### CI/CD
 
@@ -62,12 +69,6 @@ Then you need to remove file `.github/workflows/deploy.yml`
 The Github action configured in this starter kit will deploy a static site to an Amazon S3 bucket, if you want to
 deploy to another provider, in that case you need to updated
 file `. github/workflows/deploy.yml` to suite your platform needs.
-
-## Warning
-
-You could be tempted to use `const { colorMode, toggleColorMode } = useColorMode()` to toggle the theme color
-directly within a page, don't do that. `colorMode` will always return undefined.
-You need to use `usetColorMode()` hook within a component and import this component in the page where you want to use it.
 
 ## Notes
 
