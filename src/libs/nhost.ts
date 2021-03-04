@@ -1,12 +1,12 @@
-import nhost from 'nhost-js-sdk'
+import { createClient } from 'nhost-js-sdk'
 
 const config = {
-  base_url: process.env.NEXT_PUBLIC_BACKEND_ENDPOINT,
+  baseURL: process.env.NEXT_PUBLIC_BACKEND_ENDPOINT,
 }
 
-nhost.initializeApp(config)
+const nhostClient = createClient(config)
 
-const auth = nhost.auth()
-const storage = nhost.storage()
+const auth = nhostClient.auth
+const storage = nhostClient.storage
 
 export { auth, storage }
