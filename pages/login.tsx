@@ -7,23 +7,23 @@ import { ReactElement, useEffect } from 'react'
 
 export default function LoginPage(): ReactElement {
   const router = useRouter()
-  const { redirectTo, userId, removeRedirectTo, checkingAuth } = usePrivateRoute()
+  const { redirectTo, user, removeRedirectTo } = usePrivateRoute()
 
   useEffect(() => {
+    if (user) {
+      router.push(redirectTo || '/')
+    }
     return () => {
       removeRedirectTo()
     }
-  }, [removeRedirectTo])
+  }, [removeRedirectTo, user, redirectTo])
 
-  if (userId) {
-    router.push(redirectTo || '/')
-  }
-
-  if (checkingAuth && userId === null) {
+  console.warn('user in login')
+  if (user === null) {
     return <FullPageLoader />
   }
 
-  return !userId ? (
+  return !user ? (
     <Layout>
       <Login />
     </Layout>

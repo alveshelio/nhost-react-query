@@ -1,9 +1,9 @@
+import { GraphQLClient } from 'graphql-request'
 import { RequestDocument } from 'graphql-request/dist/types'
 import { useQuery, UseQueryResult } from 'react-query'
-import { GraphQLClient } from 'graphql-request'
 
 interface UseGQLQueryProps {
-  key: string
+  key: string | unknown[]
   query: RequestDocument
   variables?: unknown
   config?: unknown

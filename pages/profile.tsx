@@ -6,9 +6,9 @@ import { ReactElement } from 'react'
 
 export default function ProfilePage(): ReactElement {
   const { pathname } = useRouter()
-  const { userId, checkingAuth } = usePrivateRoute(pathname)
+  const { user } = usePrivateRoute(pathname)
 
-  if (checkingAuth && userId === null) {
+  if (user === null) {
     return <FullPageLoader />
   }
 
