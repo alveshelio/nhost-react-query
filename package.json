@@ -25,7 +25,7 @@
     "@emotion/styled": "11.1.5",
     "@nhost/react-apollo": "^1.0.7",
     "@nhost/react-auth": "^1.0.5",
-    "@testing-library/dom": "7.29.6",
+    "@testing-library/dom": "7.30.0",
     "@testing-library/jest-dom": "5.11.9",
     "@testing-library/react": "11.2.5",
     "@testing-library/user-event": "12.8.1",
